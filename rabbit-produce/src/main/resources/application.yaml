@@ -1,0 +1,11 @@
+server:
+  port: 8001
+spring:
+  rabbitmq:
+    host: 121.199.39.92
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    publisher-confirm-type: correlated   #开启发布确认
+    publisher-returns: true   #开启投递队列失败返回

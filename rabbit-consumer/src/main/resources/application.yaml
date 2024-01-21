@@ -1,0 +1,17 @@
+server:
+  port: 8002
+spring:
+  rabbitmq:
+    host: 121.199.39.92
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    listener:
+      simple:
+        acknowledge-mode: manual
+        prefetch: 5  #内部维护了一个阻塞队列，该值代表一次性从RabbitMQ中投递的消息最大数量，每次确认后queue中的消息数量-1，RabbitMQ会继续向队列投递消息，默认情况下消费者的数量为1，不会并发消费
+        # rabbitmq并发消费的两个参数prefetchCount和concurrentConsumers
+        # concurrentConsumers是设置并发消费者的个数,可以进行初始化-最大值动态调整,并发消费者可以提高消息的消费能力,防止消息的堆积
+        # prefechCount是每个消费者一次性从broker中取出的消息个数,提高这个参数并不能对消息实现并发消费,仅仅是减少了网络传输的时间
+        concurrency: 5  # 该参数可以控制并发量
